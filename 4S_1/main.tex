@@ -1,0 +1,74 @@
+\RequirePackage{plautopatch}
+\RequirePackage{fix-cm}
+\documentclass[uplatex,dvipdfmx,paper=a4paper,fontsize=10.5bp,jafontscale=0.92469,head_space=25truemm,foot_space=25truemm,gutter=25truemm,fore-edge=25truemm,baselineskip=15bp]{jlreq}% 2025/05/07 l47:c46
+\usepackage{bxpapersize}% 用紙サイズを dvipdfmx に渡す
+\usepackage[1.7]{bxpdfver}% PDF のバージョンを指定
+% 欧文フォント（タイムズ系）
+\usepackage[full]{textcomp}                       % 記号類の補完
+\usepackage[nohelv,nott,defaultsups]{newtxtext}   % 脚注記号は LaTeX 標準のまま
+\usepackage[scale=0.85]{tgheros}                  % TeX Gyre Hereos(Helvetica)
+\usepackage[bigdelims,vvarbb]{newtxmath}          % 黒板太字は STIX,amsmath も読み込まれる
+%\usepackage[amsthm,bigdelims,vvarbb]{newtxmath}  % 黒板太字は STIX,amsmath も読み込まれる
+\usepackage[cal=boondoxo]{mathalpha}              % 花文字 mathcal (cal=cm): (mathalfa → mathalpha)
+% タイプライタ体
+\usepackage[varqu,varl]{inconsolata}
+\usepackage[all,warning]{onlyamsmath}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularray}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{ascmac}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+\usepackage{pxjahyper}% 日本語の文字化け対策
+\urlstyle{same}% url のフォントの変更（デフォルトは \ttfamily）
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 図表のキャプションを変更
+\jlreqsetup{
+  caption_font={\normalsize\selectfont\rmfamily},
+  caption_label_font={\normalsize\selectfont\bfseries},
+  caption_after_label_space={0.75zw}
+}
+
+% 節ごとにナンバリング
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{equation}{section}
+
+% 見出しのスペース調整
+\ModifyHeading{section}{font={\large\sffamily\gtfamily\bfseries},before_space=1.75zh,after_space=1.25zh}
+\ModifyHeading{subsection}{font={\normalsize\sffamily\gtfamily\bfseries},before_space=1.5zh,after_space=1zh}
+\ModifyHeading{subsubsection}{font={\normalsize\sffamily\gtfamily\bfseries},before_space=1.5zh,after_space=1zh}
+% 連続する見出しのスペース調整
+\SetBlockHeadingSpaces{%
+  {_section{before_space=1.75zh,after_space=1zh},_subsection{after_space=1zh}}%
+  {_section{before_space=1.75zh,after_space=1zh},_subsection{after_space=1zh},_subsubsection{after_space=1zh}}%
+  {_subsection{before_space=1.5zh,after_space=1zh},_subsubsection{after_space=1zh}}%
+}
+
+% 参考文献
+\makeatletter
+\renewcommand{\@cite}[1]{\textsuperscript{[#1]}}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% 表紙
+\pagenumbering{roman}% dvipdfmx:warning: Object @page.1 already defined. 対策(hyperref.sty とtitlepage で発生?)
+\input{cover}
+
+% 本文
+\pagenumbering{arabic}% dvipdfmx:warning: Object @page.1 already defined. 対策
+\input{part10} \newpage
+\input{part20} \newpage
+\input{part30} \newpage
+
+% 参考文献
+\input{ref}
+
+\end{document}
