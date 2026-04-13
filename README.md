@@ -87,4 +87,3 @@ go run .
 
 - TeX の補助ファイルは `.gitignore` で無視しています。
 - `*.pdf` も無視しているため、ビルドした PDF は通常 Git 管理の対象になりません。
-- `gonum/plot` の import パスは `github.com/gonum/plot` ではなく `gonum.org/v1/plot` です。
